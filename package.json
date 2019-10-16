@@ -1,0 +1,22 @@
+{
+  "name": "projetjeunode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OlivierCrochet/ProjetJeuNode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OlivierCrochet/ProjetJeuNode/issues"
+  },
+  "homepage": "https://github.com/OlivierCrochet/ProjetJeuNode#readme",
+  "dependencies": {
+    "phaser": "^3.20.1"
+  }
+}
