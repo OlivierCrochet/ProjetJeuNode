@@ -36,6 +36,7 @@
     var platforms;
     var cursors;
 
+    var jumpCount;
     var game = new Phaser.Game(config);
 
     function preload ()
@@ -44,18 +45,13 @@
         this.load.image('ground', 'assets/platform.png');
         this.load.image('star', 'assets/star.png');
         this.load.image('bomb', 'assets/bomb.png');
-        this.load.image('bat', 'assets/bat1.png');
-        this.load.image('barre', 'assets/barre.png');
-
         this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     }
 
-
     function create ()
     {
-        
         this.add.image(400, 300, 'sky');
-        this.add.image(75, 460, 'bat');
+
         platforms = this.physics.add.staticGroup();
 
         platforms.create(400, 568, 'ground').setScale(2).refreshBody();
@@ -63,14 +59,13 @@
         platforms.create(600, 400, 'ground');
         platforms.create(50, 250, 'ground');
         platforms.create(750, 220, 'ground');
-        platforms.create(799, 300, 'barre');
 
         player = this.physics.add.sprite(100, 450, 'dude');
 
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
 
-        this.anims. create({
+        this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
             frameRate: 10,
@@ -91,10 +86,9 @@
         });
 
         cursors = this.input.keyboard.createCursorKeys();
-        
+
         this.physics.add.collider(player, platforms);
     }
-       
     function update ()
     {
         if (cursors.left.isDown)
@@ -115,12 +109,18 @@
 
             player.anims.play('turn');
         }
-
-        if (cursors.up.isDown && player.body.touching.down)
+        if  (player.body.touching.down){
+            jumpCount = 0;
+        }
+        if (cursors.up.isDown && jumpCount <= 1)
         {
             player.setVelocityY(-330);
+            if (jumpCount === 0){
+                jumpCount +1;
+            }
+            
+            console.log(jumpCount)
         }
-
     }
 
 </script>
