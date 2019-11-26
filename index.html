@@ -2,21 +2,23 @@
 <html lang="en"> 
 <head> 
     <meta charset="UTF-8" />
-    <title>Making your first Phaser 3 Game - Part 1</title>
+    <title>PhaserGame</title>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <script src="src/apiServices/api.js"></script>
     <style type="text/css">
         body {
             margin: 0;
         }
     </style>
 </head>
+
 <body>
-function preload ()
-    {
-        this.load.image('sky', 'assets/sky.png');
-        this.load.image('ground', 'assets/platform.png');
-        this.load.image('star', 'assets/star.png');
-        this.load.image('bomb', 'assets/bomb.png');
-        this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-    }
-<script src="preload.js"></script>
+    <form>
+        <input type="text" name="username">
+        <input type="text" name="password">
+        <input type="submit">
+    </form>
+    <!-- <script src="src/level.js" ></script> -->
+</body>
+
+</html>
