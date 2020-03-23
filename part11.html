@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <FORM action="accueil.html" >
+    <FORM action="index.html" >
         <INPUT type='submit' value='accueil'> </INPUT>
     </FORM>
 
@@ -131,38 +131,8 @@ function create ()
     this.physics.add.overlap(player, stars, collectStar, null, this);
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
-}
 
-function update ()
-{
-    if (gameOver)
-    {
-        return;
-    }
-
-    if (cursors.left.isDown)
-    {
-        player.setVelocityX(-160);
-
-        player.anims.play('left', true);
-    }
-    else if (cursors.right.isDown)
-    {
-        player.setVelocityX(160);
-
-        player.anims.play('right', true);
-    }
-    else
-    {
-        player.setVelocityX(0);
-
-        player.anims.play('turn');
-    }
-
-    if (cursors.up.isDown && player.body.touching.down)
-    {
-        player.setVelocityY(-330);
-    }
+    
 }
 
 function collectStar (player, star)
@@ -179,35 +149,91 @@ function collectStar (player, star)
         stars.children.iterate(function (child) {
 
             child.enableBody(true, child.x, 0, true, true);
+
         });
 
 
-        var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+    var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+    var bomb = bombs.create(x, 16, 'bomb');
+    bomb.setBounce(1);
+    bomb.setCollideWorldBounds(true);
 
-        var bomb = bombs.create(x, 16, 'bomb');
-        bomb.setBounce(1);
-        bomb.setCollideWorldBounds(true);
-        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-        bomb.allowGravity = false;
-        
-        var bomb = bombs.create(x, 16, 'bomb');
-        bomb.setBounce(1);
-        bomb.setCollideWorldBounds(true);
-        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-        bomb.allowGravity = false;
+    var bombvelocityx = (((player.x-(config.width/2)) - (bomb.x))
+    /(Math.abs((player.x-(config.width/2))- (bomb.x)))*50);
+    bomb.setVelocity(bombvelocityx);
+   }
+   console.log(bomb);
+  
+} 
 
+
+
+function update ()
+{
+    if (gameOver)
+    {
+        return;
     }
+
+    if (cursors.left.isDown)
+    {
+        player.setVelocityX(-160);
+
+        player.anims.play('left', true);
+         
+    }
+    else if (cursors.right.isDown)
+    {
+        player.setVelocityX(160);
+
+        player.anims.play('right', true);
+         
+    }
+    else
+    {
+        player.setVelocityX(0);
+
+        player.anims.play('turn');
+         
+    }
+
+    if (cursors.up.isDown && player.body.touching.down)
+    {
+        player.setVelocityY(-330);
+    }   
+    
+    
 }
+
+
+
+
+  
+
+    
 
 function hitBomb (player, bomb)
 {
-    this.physics.pause();
 
-    player.setTint(0xff0000);
+
+
+if (bomb.enableBody())
+{
+    pv = pv - 1;
+    
+    if (pv == 0)
+    {
+        bomb.disableBody(true, true);
+    }
+}
+
+    //this.physics.pause();
+
+    /*player.setTint(0xff0000);
 
     player.anims.play('turn');
 
-    gameOver = true;
+    gameOver = true;*/
 }
 
 </script>

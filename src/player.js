@@ -65,5 +65,3 @@ if (cursors.left.isDown)
         player.setVelocityY(600);
     }
 }
-
-module.exports(player)
